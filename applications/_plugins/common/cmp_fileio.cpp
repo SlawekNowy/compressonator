@@ -258,7 +258,9 @@ bool CMP_IsHidden(const std::string& fullPath)
     sfs::path path(fullPath);
     if (path.filename().string().find(".") == 0)
         return true;
+    return false;
 #else
+    //TODO: POSIX
     return false;
 #endif
 #endif
