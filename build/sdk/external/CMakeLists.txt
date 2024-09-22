@@ -11,8 +11,8 @@ target_link_libraries(ExtDirectX INTERFACE
 
 if (OPTION_BUILD_BROTLIG)
     # TODO: Change this back before the release
-    set(BROTLIG_ROOT_PATH ${COMPRESSONATOR_ROOT_PATH}/compressonator_internal/external/brotlig)
-    #set(BROTLIG_ROOT_PATH ${COMPRESSONATOR_ROOT_PATH}/../common/lib/ext/brotlig)
+    #set(BROTLIG_ROOT_PATH ${COMPRESSONATOR_ROOT_PATH}/compressonator_internal/external/brotlig)
+    set(BROTLIG_ROOT_PATH ${COMPRESSONATOR_ROOT_PATH}/../common/lib/ext/brotlig)
 
     ExternalProject_Add(extern_brotlig
         SOURCE_DIR ${BROTLIG_ROOT_PATH}
@@ -30,9 +30,10 @@ if (OPTION_BUILD_BROTLIG)
         ${BROTLIG_ROOT_PATH}/external/brotli/c/include/
     )
 
+#why does this exist?
     target_link_libraries(ExtBrotlig INTERFACE
-        ${BROTLIG_ROOT_PATH}/build/$<$<CONFIG:Debug>:Debug>$<$<CONFIG:Release>:Release>/brotlig.lib
-        ${BROTLIG_ROOT_PATH}/build/external/brotli/$<$<CONFIG:Debug>:Debug>$<$<CONFIG:Release>:Release>/brotli.lib
+        ${BROTLIG_ROOT_PATH}/build/$<$<CONFIG:Debug>:Debug>$<$<CONFIG:Release>:Release>$<$<CONFIG:RelWithDebInfo>:RelWithDebInfo>/brotlig.lib
+        ${BROTLIG_ROOT_PATH}/build/external/brotli/$<$<CONFIG:Debug>:Debug>$<$<CONFIG:Release>:Release>$<$<CONFIG:RelWithDebInfo>:RelWithDebInfo>/brotlig.lib
     )
 
     add_dependencies(ExtBrotlig extern_brotlig)

@@ -29,8 +29,8 @@ target_include_directories(ExtBrotlig INTERFACE
 )
 
 target_link_libraries(ExtBrotlig INTERFACE
-    ${BROTLIG_ROOT_PATH}/build/$<$<CONFIG:Debug>:Debug>$<$<CONFIG:Release>:Release>/brotlig.lib
-    ${BROTLIG_ROOT_PATH}/build/external/cmake/customtargets/$<$<CONFIG:Debug>:Debug>$<$<CONFIG:Release>:Release>/brotli.lib
+    ${BROTLIG_ROOT_PATH}/build/$<$<CONFIG:Debug>:Debug>$<$<CONFIG:Release>:Release>$<$<CONFIG:RelWithDebInfo>:RelWithDebInfo>/brotlig.lib
+    ${BROTLIG_ROOT_PATH}/build/external/cmake/customtargets/$<$<CONFIG:Debug>:Debug>$<$<CONFIG:Release>:Release>$<$<CONFIG:RelWithDebInfo>:RelWithDebInfo>/brotli.lib
 )
 
 add_dependencies(ExtBrotlig extern_brotlig)
