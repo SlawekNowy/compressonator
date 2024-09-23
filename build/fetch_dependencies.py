@@ -128,8 +128,10 @@ gitMappingUni = {
 # The following section contains OS-specific dependencies that are downloaded and placed in the specified target directory.
 # key = GitHub release link
 # value = location
+
+#Pragma note: bump DXTex to November 2021 for vs2022 support.
 downloadMappingWin = {
-    "https://github.com/microsoft/DirectXTex/archive/jun2020b.zip"                                      : cmpCommonZip+"directxtex/",
+    "https://github.com/microsoft/DirectXTex/archive/nov2021.zip"                                      : cmpCommonZip+"directxtex/",
     "https://github.com/GPUOpen-LibrariesAndSDKs/OCL-SDK/files/1406216/lightOCLSDK.zip"                 : cmpCommonZip+"opencl/",
     "https://github.com/microsoft/DirectXShaderCompiler/releases/download/v1.6.2112/dxc_2021_12_08.zip" : cmpCommonZip+"dxc/"
 }

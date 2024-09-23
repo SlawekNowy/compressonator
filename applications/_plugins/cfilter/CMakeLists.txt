@@ -1,5 +1,5 @@
 if (OPTION_CMP_DIRECTX )
-link_directories( ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/Bin/Desktop_2019/x64 )
+link_directories( ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/Bin/Desktop_2022/x64 )
 endif()
 
 add_library(Image_MipMap SHARED)
@@ -14,7 +14,7 @@ target_sources(Image_MipMap PRIVATE
 
 target_include_directories(Image_MipMap PUBLIC
     ./
-    ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex
+    ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex
   
     ${PROJECT_SOURCE_DIR}/cmp_compressonatorlib         # compressonator.h
     ${PROJECT_SOURCE_DIR}/cmp_framework                 # compute_base.h

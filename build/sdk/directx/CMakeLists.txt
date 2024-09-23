@@ -1,6 +1,6 @@
 link_directories(
-    ${COMPRESSONATOR_ROOT_PATH}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/Bin/Desktop_2019/x64/Release
-    ${COMPRESSONATOR_ROOT_PATH}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/Bin/Desktop_2019/x64/Debug
+    ${COMPRESSONATOR_ROOT_PATH}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/Bin/Desktop_2022/x64/Release
+    ${COMPRESSONATOR_ROOT_PATH}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/Bin/Desktop_2022x64/Debug
     )
 
 add_library(EncodeWith_DXC SHARED )
@@ -36,7 +36,7 @@ target_include_directories(EncodeWith_DXC PRIVATE
     ${COMPRESSONATOR_ROOT_PATH}/cmp_core/shaders/compiled     # static compiler shaders 
     ${COMPRESSONATOR_ROOT_PATH}/applications/_libs/cmp_math   # cmp_math_common.h
     ${COMPRESSONATOR_ROOT_PATH}/applications/_plugins/common  # tc_pluginapi.h
-    ${COMPRESSONATOR_ROOT_PATH}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex  
+    ${COMPRESSONATOR_ROOT_PATH}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex  
 )
 
 set_target_properties(EncodeWith_DXC PROPERTIES 

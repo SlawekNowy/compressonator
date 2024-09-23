@@ -1,7 +1,8 @@
 add_library(ExtDirectXTex INTERFACE)
 
+#TODO: Try using CMake version of this instead.
 target_include_directories(ExtDirectXTex INTERFACE
-    ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex_jun2020b/DirectXTex
+    ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex_nov2021/DirectXTex
 )
 
 #message(STATUS "****************** START: Compile DirectXTex [${CMAKE_CXX_COMPILER}]" )
@@ -13,12 +14,12 @@ target_include_directories(ExtDirectXTex INTERFACE
 # Build Release platform
 execute_process(
     COMMAND ${CMAKE_VS_MSBUILD_COMMAND} 
-            ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/DirectXTex_Desktop_2019.vcxproj  /p:Configuration=Release  /p:Platform=${CMAKE_VS_PLATFORM_NAME} 
+            ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/DirectXTex_Desktop_2022.vcxproj  /p:Configuration=Release  /p:Platform=${CMAKE_VS_PLATFORM_NAME} 
     )
 # Build Debug platform
 execute_process(
     COMMAND ${CMAKE_VS_MSBUILD_COMMAND} 
-            ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/DirectXTex_Desktop_2019.vcxproj  /p:Configuration=Debug  /p:Platform=${CMAKE_VS_PLATFORM_NAME} 
+            ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/DirectXTex_Desktop_2022.vcxproj  /p:Configuration=Debug  /p:Platform=${CMAKE_VS_PLATFORM_NAME} 
     )
 #message(STATUS "****************** END: Compile DirectXTex" )
 
@@ -26,8 +27,8 @@ execute_process(
 # "$<$<CONFIG:Debug>:Release>$<$<CONFIG:Release>:Debug>"/DirectXTex.lib)
 
 # file(GLOB_RECURSE HEADERS
-#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/*.h
-#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/*.inl
+#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/*.h
+#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/*.inl
 # )
 # 
 # file(GLOB_RECURSE SOURCES
@@ -35,8 +36,8 @@ execute_process(
 # )
 # 
 # file(GLOB_RECURSE SHADERS
-#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/Shaders/*.hlsl
-#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTexShaders/*.inc
+#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/Shaders/*.hlsl
+#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTexShaders/*.inc
 # )
 # 
 # target_sources(ExtDirectXTex PRIVATE
@@ -45,7 +46,7 @@ execute_process(
 # )
 # 
 # target_include_directories(ExtDirectXTex PUBLIC
-#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex
+#     ${CMAKE_CURRENT_LIST_DIR}/../../../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex
 #     #directxtex-submodule
 # )
 # 

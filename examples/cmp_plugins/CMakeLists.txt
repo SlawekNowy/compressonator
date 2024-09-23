@@ -1,8 +1,8 @@
 
 if (OPTION_CMP_DIRECTX )
     link_directories(
-        ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/Bin/Desktop_2019/x64/Release
-        ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/Bin/Desktop_2019/x64/Debug
+        ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/Bin/Desktop_2022/x64/Release
+        ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/Bin/Desktop_2022/x64/Debug
     )
 endif()
 

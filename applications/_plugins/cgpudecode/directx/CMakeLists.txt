@@ -1,6 +1,6 @@
 
 link_directories(
-    ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex/Bin/Desktop_2019/x64/$<$<CONFIG:Debug>:debug>$<$<CONFIG:Release>:release>
+    ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex/Bin/Desktop_2022/x64/$<$<CONFIG:Debug>:debug>$<$<CONFIG:Release>:release>$<$<CONFIG:RelWithDebInfo>:release>
     )
 
 add_library(GPUDecode_DirectX SHARED)
@@ -27,7 +27,7 @@ target_include_directories(GPUDecode_DirectX PRIVATE
     ${PROJECT_SOURCE_DIR}/cmp_framework/common/half
     ${PROJECT_SOURCE_DIR}/applications/_libs/gpu_decode
     ${PROJECT_SOURCE_DIR}/applications/_plugins/common
-    ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-jun2020b/DirectXTex
+    ${PROJECT_SOURCE_DIR}/../common/lib/ext/directxtex/DirectXTex-nov2021/DirectXTex
 )
 
 target_compile_definitions(GPUDecode_DirectX PRIVATE BUILD_AS_PLUGIN_DLL=1)
