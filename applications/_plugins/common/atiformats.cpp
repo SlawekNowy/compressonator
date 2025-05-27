@@ -134,7 +134,7 @@ CMP_FormatDesc g_FormatDesc[] = {
 static const CMP_DWORD FORMAT_DESC_COUNT       = sizeof(g_FormatDesc) / sizeof(g_FormatDesc[0]);
 static const CMP_DWORD TEXTURE_TYPE_DESC_COUNT = sizeof(g_TextureTypeDesc) / sizeof(g_TextureTypeDesc[0]);
 
-CMP_FORMAT CMP_API CMP_ParseFormat(char* pFormat)
+CMP_FORMAT CMP_DLLEXPORT CMP_API CMP_ParseFormat(char* pFormat)
 {
     if (pFormat == NULL)
         return CMP_FORMAT_Unknown;
@@ -200,7 +200,7 @@ CMP_CHAR* GetTextureTypeDesc(CMP_TextureType nTextureType)
     return g_TextureTypeDesc[0].pszTextureTypeDesc;
 }
 
-void CMP_API CMP_Format2FourCC(CMP_FORMAT format, MipSet* pMipSet)
+void CMP_DLLEXPORT CMP_API CMP_Format2FourCC(CMP_FORMAT format, MipSet* pMipSet)
 {
     switch (format)
     {
@@ -444,7 +444,7 @@ CMP_FORMAT CMP_API CMP_FourCC2Format(CMP_DWORD fourCC)
     return (CMP_FORMAT_Unknown);
 }
 
-CMP_BOOL CMP_API CMP_IsCompressedFormat(CMP_FORMAT format)
+CMP_BOOL CMP_DLLEXPORT CMP_API CMP_IsCompressedFormat(CMP_FORMAT format)
 {
     switch (format)
     {
@@ -502,7 +502,7 @@ CMP_BOOL CMP_API CMP_IsCompressedFormat(CMP_FORMAT format)
     return false;
 }
 
-CMP_BOOL CMP_API CMP_IsFloatFormat(CMP_FORMAT InFormat)
+CMP_BOOL CMP_DLLEXPORT CMP_API CMP_IsFloatFormat(CMP_FORMAT InFormat)
 {
     switch (InFormat)
     {

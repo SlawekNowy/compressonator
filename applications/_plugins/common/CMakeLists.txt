@@ -67,6 +67,11 @@ add_library(CMP_Common STATIC
     ${PLUGIN_COMMON_INC_QT}
     )
 
+target_compile_definitions(CMP_Common
+  PUBLIC
+    CMP_Common_STATIC
+)
+
 target_include_directories(CMP_Common PRIVATE
   .
   ${PROJECT_SOURCE_DIR}/cmp_framework

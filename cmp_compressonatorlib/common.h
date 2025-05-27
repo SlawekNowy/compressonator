@@ -130,7 +130,25 @@ typedef struct
 
 } CMP_ANALYSIS_DATA;
 
-struct CMP_CMIPS
+#if defined(WIN32) || defined(_WIN64)
+
+#if defined(CMP_Framework_EXPORTS) || defined(CMP_Compressonator_EXPORTS)
+#define CMP_FRAMEWORK_DLLEXPORT __declspec(dllexport)
+#else
+#define CMP_FRAMEWORK_DLLEXPORT __declspec(dllimport)
+#endif
+
+#else
+
+#if defined(CMP_Framework_EXPORTS) || defined(CMP_Compressonator_EXPORTS)
+#define CMP_FRAMEWORK_DLLEXPORT __attribute__((visibility("default")))
+#else
+#define CMP_FRAMEWORK_DLLEXPORT
+#endif
+
+#endif
+
+struct CMP_FRAMEWORK_DLLEXPORT CMP_CMIPS
 {
     // User Configurable Print lines
     int  m_infolevel = 1;
@@ -138,6 +156,7 @@ struct CMP_CMIPS
     void (*PrintLine)(char*) = nullptr;
     void Print(const char* Format, ...);
 
+	CMP_CMIPS();
     CMP_MipLevel* GetMipLevel(const CMP_MipSet* pMipSet, CMP_INT nMipLevel, CMP_INT nFaceOrSlice = 0);
 
     int GetMaxMipLevels(CMP_INT nWidth, CMP_INT nHeight, CMP_INT nDepth);

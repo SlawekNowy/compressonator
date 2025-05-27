@@ -83,7 +83,7 @@ void CMP_CMIPS::Print(const char* Format, ...)
 
 // Determines the active channels used for a given format
 // See CMP_AnalysisData for more details on the bits set
-CMP_UINT CMP_API CMP_getFormat_nChannels(CMP_FORMAT format)
+CMP_UINT CMP_DLLEXPORT CMP_API CMP_getFormat_nChannels(CMP_FORMAT format)
 {
     CMP_UINT RGBAChannels;
 
@@ -107,7 +107,7 @@ CMP_UINT CMP_API CMP_getFormat_nChannels(CMP_FORMAT format)
     return RGBAChannels;
 }
 
-CMP_INT CMP_API CMP_CalcMinMipSize(CMP_INT nHeight, CMP_INT nWidth, CMP_INT MipsLevel)
+CMP_INT CMP_DLLEXPORT CMP_API CMP_CalcMinMipSize(CMP_INT nHeight, CMP_INT nWidth, CMP_INT MipsLevel)
 {
     while (MipsLevel > 1)
     {
@@ -118,7 +118,7 @@ CMP_INT CMP_API CMP_CalcMinMipSize(CMP_INT nHeight, CMP_INT nWidth, CMP_INT Mips
     return (nWidth);
 }
 
-CMP_INT CMP_API CMP_CalcMaxMipLevel(CMP_INT nHeight, CMP_INT nWidth, CMP_BOOL bForGPU)
+CMP_INT CMP_DLLEXPORT CMP_API CMP_CalcMaxMipLevel(CMP_INT nHeight, CMP_INT nWidth, CMP_BOOL bForGPU)
 {
     CMP_INT MaxMipLevel = 1;
     while (MaxMipLevel < MAX_MIPLEVEL_SUPPORTED && (nWidth > 1 || nHeight > 1))
@@ -136,7 +136,7 @@ CMP_INT CMP_API CMP_CalcMaxMipLevel(CMP_INT nHeight, CMP_INT nWidth, CMP_BOOL bF
     return MaxMipLevel;
 }
 
-CMP_ERROR CMP_API CMP_CreateCompressMipSet(CMP_MipSet* pMipSetCMP, CMP_MipSet* pMipSetSRC)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CreateCompressMipSet(CMP_MipSet* pMipSetCMP, CMP_MipSet* pMipSetSRC)
 {
     CMP_CMIPS CMips;
 
@@ -185,7 +185,7 @@ CMP_ERROR CMP_API CMP_CreateCompressMipSet(CMP_MipSet* pMipSetCMP, CMP_MipSet* p
     return CMP_OK;
 }
 
-CMP_ERROR CMP_API CMP_CreateMipSet(CMP_MipSet* pMipSet, CMP_INT nWidth, CMP_INT nHeight, CMP_INT nDepth, ChannelFormat channelFormat, TextureType textureType)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CreateMipSet(CMP_MipSet* pMipSet, CMP_INT nWidth, CMP_INT nHeight, CMP_INT nDepth, ChannelFormat channelFormat, TextureType textureType)
 {
     CMP_CMIPS CMips;
 
@@ -707,7 +707,7 @@ void CMP_calcMSE_PSNRf32(MipLevel* pCurMipLevel, CMP_FLOAT* pdata1, CMP_FLOAT* p
     }
 }
 
-CMP_ERROR CMP_API CMP_MipSetAnlaysis(CMP_MipSet* src1, CMP_MipSet* src2, CMP_INT nMipLevel, CMP_INT nFaceOrSlice, CMP_AnalysisData* pAnalysisData)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_MipSetAnlaysis(CMP_MipSet* src1, CMP_MipSet* src2, CMP_INT nMipLevel, CMP_INT nFaceOrSlice, CMP_AnalysisData* pAnalysisData)
 {
     if (!src1 || !src2)
         return CMP_ERR_GENERIC;
@@ -806,6 +806,8 @@ CMP_INT CMP_MaxFacesOrSlices(const CMP_MipSet* pMipSet, CMP_INT nMipLevel)
     }
     return 0;  //nMipLevel was too high
 }
+
+CMP_CMIPS::CMP_CMIPS() {}
 
 CMP_MipLevel* CMP_CMIPS::GetMipLevel(const CMP_MipSet* pMipSet, int nMipLevel, int nFaceOrSlice)
 {

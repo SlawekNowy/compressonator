@@ -351,7 +351,7 @@ void GenerateMipmapLevel(MipLevel* currMipLevel, MipLevel** prevMipLevels, uint3
 }
 
 //nMinSize : The size in pixels used to determine how many mip levels to generate. Once all dimensions are less than or equal to nMinSize your mipper should generate no more mip levels.
-CMP_INT CMP_API CMP_GenerateMIPLevelsEx(CMP_MipSet* pMipSet, CMP_CFilterParams* CFilterParam)
+CMP_INT CMP_DLLEXPORT CMP_API CMP_GenerateMIPLevelsEx(CMP_MipSet* pMipSet, CMP_CFilterParams* CFilterParam)
 {
     CMP_CMIPS CMips;
     assert(pMipSet);
@@ -430,7 +430,7 @@ CMP_INT CMP_API CMP_GenerateMIPLevelsEx(CMP_MipSet* pMipSet, CMP_CFilterParams* 
     return CMP_OK;
 }
 
-CMP_INT CMP_API CMP_GenerateMIPLevels(CMP_MipSet* pMipSet, CMP_INT nMinSize)
+CMP_INT CMP_DLLEXPORT CMP_API CMP_GenerateMIPLevels(CMP_MipSet* pMipSet, CMP_INT nMinSize)
 {
     CMP_CFilterParams CFilterParam  = {};
     CFilterParam.dwMipFilterOptions = 0;
