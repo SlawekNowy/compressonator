@@ -123,7 +123,7 @@ void CMP_RegisterHostPlugins()
 //
 // Closes the Compute library allocation
 //
-CMP_ERROR CMP_API CMP_DestroyComputeLibrary(bool forceclose = false)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_DestroyComputeLibrary(bool forceclose = false)
 {
     if (g_ComputeBase && forceclose)
     {
@@ -249,7 +249,7 @@ bool isDX12Supported()
 //
 // Initialize the Compute library based on support types
 //
-CMP_ERROR CMP_API CMP_CreateComputeLibrary(MipSet* srcTexture, KernelOptions* kernel_options, void* CMips)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CreateComputeLibrary(MipSet* srcTexture, KernelOptions* kernel_options, void* CMips)
 {
     CMP_Compute_type CompType   = kernel_options->encodeWith;
     CMP_FORMAT       cmp_format = kernel_options->format;
@@ -357,7 +357,7 @@ CMP_ERROR CMP_API CMP_CreateComputeLibrary(MipSet* srcTexture, KernelOptions* ke
     return CMP_OK;
 }
 
-CMP_ERROR CMP_API CMP_GetPerformanceStats(KernelPerformanceStats* pPerfStats)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_GetPerformanceStats(KernelPerformanceStats* pPerfStats)
 {
     CMP_ERROR result;
     if (g_ComputeBase)
@@ -371,7 +371,7 @@ CMP_ERROR CMP_API CMP_GetPerformanceStats(KernelPerformanceStats* pPerfStats)
     return CMP_OK;
 }
 
-CMP_ERROR CMP_API CMP_GetDeviceInfo(KernelDeviceInfo* pDeviceInfo)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_GetDeviceInfo(KernelDeviceInfo* pDeviceInfo)
 {
     CMP_ERROR result;
     if (g_ComputeBase)
@@ -385,7 +385,7 @@ CMP_ERROR CMP_API CMP_GetDeviceInfo(KernelDeviceInfo* pDeviceInfo)
     return CMP_OK;
 }
 
-CMP_ERROR CMP_API CMP_CompressTexture(KernelOptions* options, CMP_MipSet srcMipSet, CMP_MipSet dstMipSet, CMP_Feedback_Proc pFeedback)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CompressTexture(KernelOptions* options, CMP_MipSet srcMipSet, CMP_MipSet dstMipSet, CMP_Feedback_Proc pFeedback)
 {
     CMP_ERROR result;
 
@@ -401,7 +401,7 @@ CMP_ERROR CMP_API CMP_CompressTexture(KernelOptions* options, CMP_MipSet srcMipS
     return CMP_OK;
 }
 
-CMP_ERROR CMP_API CMP_SetComputeOptions(ComputeOptions* options)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_SetComputeOptions(ComputeOptions* options)
 {
     options->plugin_compute = plugin_encoder_codec;
     if (g_ComputeBase)
@@ -419,7 +419,7 @@ CMP_ERROR CMP_API CMP_SetComputeOptions(ComputeOptions* options)
 //===========================================================================================================
 std::mutex cmp_mutex;
 
-CMP_ERROR CMP_API CMP_ProcessTexture(CMP_MipSet* srcMipSet, CMP_MipSet* dstMipSet, KernelOptions kernelOptions, CMP_Feedback_Proc pFeedbackProc)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_ProcessTexture(CMP_MipSet* srcMipSet, CMP_MipSet* dstMipSet, KernelOptions kernelOptions, CMP_Feedback_Proc pFeedbackProc)
 {
     cmp_mutex.lock();
 
@@ -583,7 +583,7 @@ CMP_ERROR CMP_API CMP_ProcessTexture(CMP_MipSet* srcMipSet, CMP_MipSet* dstMipSe
 //
 // Block Level Encoder Support
 //
-CMP_ERROR CMP_API CMP_CreateBlockEncoder(void** block_encoder, CMP_EncoderSetting encodeSettings)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CreateBlockEncoder(void** block_encoder, CMP_EncoderSetting encodeSettings)
 {
     CMP_RegisterHostPlugins();  // Keep for legacy, user should now use CMP_InitFramework
 
@@ -619,7 +619,7 @@ CMP_ERROR CMP_API CMP_CreateBlockEncoder(void** block_encoder, CMP_EncoderSettin
     return CMP_OK;
 }
 
-CMP_ERROR CMP_API CMP_CompressBlock(void** block_encoder, void* SourceTexture, unsigned int sourceStride, void* DestTexture, unsigned int DestStride)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CompressBlock(void** block_encoder, void* SourceTexture, unsigned int sourceStride, void* DestTexture, unsigned int DestStride)
 {
     CMP_Encoder* encoder = (CMP_Encoder*)*block_encoder;
     encoder->m_srcStride = sourceStride;
@@ -628,7 +628,7 @@ CMP_ERROR CMP_API CMP_CompressBlock(void** block_encoder, void* SourceTexture, u
     return (res);
 }
 
-CMP_ERROR CMP_API
+CMP_ERROR CMP_DLLEXPORT CMP_API
 CMP_CompressBlockXY(void** block_encoder, unsigned int x, unsigned int y, void* in, unsigned int sourceStride, void* out, unsigned int DestStride)
 {
     CMP_Encoder* encoder = (CMP_Encoder*)*block_encoder;
@@ -638,12 +638,12 @@ CMP_CompressBlockXY(void** block_encoder, unsigned int x, unsigned int y, void* 
     return (res);
 }
 
-void CMP_API CMP_DestroyBlockEncoder(void** block_encoder)
+void CMP_DLLEXPORT CMP_API CMP_DestroyBlockEncoder(void** block_encoder)
 {
     delete (CMP_Encoder*)(*block_encoder);
 }
 
-void CMP_API CMP_GetMipLevel(CMP_MipLevel** data, const CMP_MipSet* pMipSet, int nMipLevel, int nFaceOrSlice)
+void CMP_DLLEXPORT CMP_API CMP_GetMipLevel(CMP_MipLevel** data, const CMP_MipSet* pMipSet, int nMipLevel, int nFaceOrSlice)
 {
     CMP_CMIPS CMips;
     *data = CMips.GetMipLevel(pMipSet, nMipLevel, nFaceOrSlice);
@@ -697,7 +697,7 @@ CMP_ERROR stb_load(const char* SourceFile, MipSet* MipSetIn)
     return CMP_OK;
 }
 
-void CMP_API CMP_FreeMipSet(CMP_MipSet* MipSetIn)
+void CMP_DLLEXPORT CMP_API CMP_FreeMipSet(CMP_MipSet* MipSetIn)
 {
     if (!MipSetIn)
         return;
@@ -715,12 +715,12 @@ char toupperChar(char ch)
     return static_cast<char>(::toupper(static_cast<unsigned char>(ch)));
 }
 
-void CMP_API CMP_InitFramework()
+void CMP_DLLEXPORT CMP_API CMP_InitFramework()
 {
     CMP_RegisterHostPlugins();
 }
 
-CMP_ERROR CMP_API CMP_LoadTexture(const char* SourceFile, CMP_MipSet* MipSetIn)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_LoadTexture(const char* SourceFile, CMP_MipSet* MipSetIn)
 {
     CMP_RegisterHostPlugins();  // Keep for legacy, user should now use CMP_InitFramework
 
@@ -780,7 +780,7 @@ CMP_ERROR CMP_API CMP_LoadTexture(const char* SourceFile, CMP_MipSet* MipSetIn)
     return status;
 }
 
-CMP_ERROR CMP_API CMP_SaveTexture(const char* DestFile, CMP_MipSet* MipSetIn)
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_SaveTexture(const char* DestFile, CMP_MipSet* MipSetIn)
 {
     CMP_RegisterHostPlugins();  // Keep for legacy, user should now use CMP_InitFramework
 
@@ -835,7 +835,7 @@ CMP_ERROR CMP_API CMP_SaveTexture(const char* DestFile, CMP_MipSet* MipSetIn)
     return CMP_OK;
 }
 
-CMP_INT CMP_API CMP_NumberOfProcessors(void)
+CMP_INT CMP_DLLEXPORT CMP_API CMP_NumberOfProcessors(void)
 {
 #ifndef _WIN32
     return sysconf(_SC_NPROCESSORS_ONLN);

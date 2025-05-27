@@ -71,8 +71,25 @@ typedef double               CMP_DOUBLE;
 
 #if defined(WIN32) || defined(_WIN64)
 #define CMP_API __cdecl
+
+#if defined(CMP_Compressonator_EXPORTS) || defined(CMP_Framework_EXPORTS)
+#define CMP_DLLEXPORT __declspec(dllexport)
+#elif defined(CMP_Common_STATIC)
+#define CMP_DLLEXPORT
 #else
+#define CMP_DLLEXPORT __declspec(dllimport)
+#endif
+
+#else
+
 #define CMP_API
+
+#if defined(CMP_Compressonator_EXPORTS) || defined(CMP_Framework_EXPORTS)
+#define CMP_DLLEXPORT __attribute__((visibility("default")))
+#else
+#define CMP_DLLEXPORT
+#endif
+
 #endif
 
 // Texture format.
@@ -1028,16 +1045,16 @@ extern "C" {
 #endif
 
 // MIP MAP Interfaces
-CMP_INT CMP_API   CMP_CalcMaxMipLevel(CMP_INT nHeight, CMP_INT nWidth, CMP_BOOL bForGPU);
-CMP_INT CMP_API   CMP_CalcMinMipSize(CMP_INT nHeight, CMP_INT nWidth, CMP_INT MipsLevel);
-CMP_INT CMP_API   CMP_GenerateMIPLevelsEx(CMP_MipSet* pMipSet, CMP_CFilterParams* pCFilterParams);
-CMP_INT CMP_API   CMP_GenerateMIPLevels(CMP_MipSet* pMipSet, CMP_INT nMinSize);
-CMP_ERROR CMP_API CMP_CreateCompressMipSet(CMP_MipSet* pMipSetCMP, CMP_MipSet* pMipSetSRC);
-CMP_ERROR CMP_API CMP_CreateMipSet(CMP_MipSet* pMipSet, CMP_INT nWidth, CMP_INT nHeight, CMP_INT nDepth, ChannelFormat channelFormat, TextureType textureType);
+CMP_INT CMP_DLLEXPORT CMP_API CMP_CalcMaxMipLevel(CMP_INT nHeight, CMP_INT nWidth, CMP_BOOL bForGPU);
+CMP_INT CMP_DLLEXPORT CMP_API CMP_CalcMinMipSize(CMP_INT nHeight, CMP_INT nWidth, CMP_INT MipsLevel);
+CMP_INT CMP_DLLEXPORT CMP_API CMP_GenerateMIPLevelsEx(CMP_MipSet* pMipSet, CMP_CFilterParams* pCFilterParams);
+CMP_INT CMP_DLLEXPORT CMP_API CMP_GenerateMIPLevels(CMP_MipSet* pMipSet, CMP_INT nMinSize);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CreateCompressMipSet(CMP_MipSet* pMipSetCMP, CMP_MipSet* pMipSetSRC);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CreateMipSet(CMP_MipSet* pMipSet, CMP_INT nWidth, CMP_INT nHeight, CMP_INT nDepth, ChannelFormat channelFormat, TextureType textureType);
 
 // MIP Map Quality
-CMP_UINT CMP_API  CMP_getFormat_nChannels(CMP_FORMAT format);
-CMP_ERROR CMP_API CMP_MipSetAnlaysis(CMP_MipSet* src1, CMP_MipSet* src2, CMP_INT nMipLevel, CMP_INT nFaceOrSlice, CMP_AnalysisData* pAnalysisData);
+CMP_UINT CMP_DLLEXPORT CMP_API CMP_getFormat_nChannels(CMP_FORMAT format);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_MipSetAnlaysis(CMP_MipSet* src1, CMP_MipSet* src2, CMP_INT nMipLevel, CMP_INT nFaceOrSlice, CMP_AnalysisData* pAnalysisData);
 
 // CMP_MIPFeedback_Proc
 // Feedback function for conversion.
@@ -1047,50 +1064,50 @@ CMP_ERROR CMP_API CMP_MipSetAnlaysis(CMP_MipSet* src1, CMP_MipSet* src2, CMP_INT
 typedef bool(CMP_API* CMP_MIPFeedback_Proc)(CMP_MIPPROGRESSPARAM mipProgress);
 
 // Converts the source texture to the destination texture using MipSets with MIP MAP Levels
-CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_MipSetOut, const CMP_CompressOptions* pOptions, CMP_Feedback_Proc pFeedbackProc);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_MipSetOut, const CMP_CompressOptions* pOptions, CMP_Feedback_Proc pFeedbackProc);
 
 //--------------------------------------------
 // CMP_Framework Lib: Texture Encoder Interfaces
 //--------------------------------------------
-CMP_ERROR CMP_API  CMP_LoadTexture(const char* sourceFile, CMP_MipSet* pMipSet);
-CMP_ERROR CMP_API  CMP_SaveTexture(const char* destFile, CMP_MipSet* pMipSet);
-CMP_ERROR CMP_API  CMP_ProcessTexture(CMP_MipSet* srcMipSet, CMP_MipSet* dstMipSet, KernelOptions kernelOptions, CMP_Feedback_Proc pFeedbackProc);
-CMP_ERROR CMP_API  CMP_CompressTexture(KernelOptions* options, CMP_MipSet srcMipSet, CMP_MipSet dstMipSet, CMP_Feedback_Proc pFeedback);
-CMP_VOID CMP_API   CMP_Format2FourCC(CMP_FORMAT format, CMP_MipSet* pMipSet);
-CMP_FORMAT CMP_API CMP_ParseFormat(char* pFormat);
-CMP_INT CMP_API    CMP_NumberOfProcessors();
-CMP_VOID CMP_API   CMP_FreeMipSet(CMP_MipSet* MipSetIn);
-CMP_VOID CMP_API   CMP_GetMipLevel(CMP_MipLevel** data, const CMP_MipSet* pMipSet, CMP_INT nMipLevel, CMP_INT nFaceOrSlice);
-CMP_ERROR CMP_API  CMP_GetPerformanceStats(KernelPerformanceStats* pPerfStats);
-CMP_ERROR CMP_API  CMP_GetDeviceInfo(KernelDeviceInfo* pDeviceInfo);
-CMP_BOOL CMP_API   CMP_IsCompressedFormat(CMP_FORMAT format);
-CMP_BOOL CMP_API   CMP_IsFloatFormat(CMP_FORMAT InFormat);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_LoadTexture(const char* sourceFile, CMP_MipSet* pMipSet);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_SaveTexture(const char* destFile, CMP_MipSet* pMipSet);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_ProcessTexture(CMP_MipSet* srcMipSet, CMP_MipSet* dstMipSet, KernelOptions kernelOptions, CMP_Feedback_Proc pFeedbackProc);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CompressTexture(KernelOptions* options, CMP_MipSet srcMipSet, CMP_MipSet dstMipSet, CMP_Feedback_Proc pFeedback);
+CMP_VOID CMP_DLLEXPORT CMP_API  CMP_Format2FourCC(CMP_FORMAT format, CMP_MipSet* pMipSet);
+CMP_FORMAT CMP_DLLEXPORT CMP_API CMP_ParseFormat(char* pFormat);
+CMP_INT CMP_DLLEXPORT CMP_API    CMP_NumberOfProcessors();
+CMP_VOID CMP_DLLEXPORT CMP_API   CMP_FreeMipSet(CMP_MipSet* MipSetIn);
+CMP_VOID CMP_DLLEXPORT CMP_API   CMP_GetMipLevel(CMP_MipLevel** data, const CMP_MipSet* pMipSet, CMP_INT nMipLevel, CMP_INT nFaceOrSlice);
+CMP_ERROR CMP_DLLEXPORT CMP_API  CMP_GetPerformanceStats(KernelPerformanceStats* pPerfStats);
+CMP_ERROR CMP_DLLEXPORT CMP_API  CMP_GetDeviceInfo(KernelDeviceInfo* pDeviceInfo);
+CMP_BOOL CMP_DLLEXPORT CMP_API   CMP_IsCompressedFormat(CMP_FORMAT format);
+CMP_BOOL CMP_DLLEXPORT CMP_API   CMP_IsFloatFormat(CMP_FORMAT InFormat);
 
 //--------------------------------------------
 // CMP_Framework Lib: Host level interface
 //--------------------------------------------
-CMP_ERROR CMP_API CMP_CreateComputeLibrary(CMP_MipSet* srcTexture, KernelOptions* kernelOptions, void* Reserved);
-CMP_ERROR CMP_API CMP_DestroyComputeLibrary(CMP_BOOL forceClose);
-CMP_ERROR CMP_API CMP_SetComputeOptions(ComputeOptions* options);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CreateComputeLibrary(CMP_MipSet* srcTexture, KernelOptions* kernelOptions, void* Reserved);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_DestroyComputeLibrary(CMP_BOOL forceClose);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_SetComputeOptions(ComputeOptions* options);
 
 //---------------------------------------------------------
 // CMP_Framework Lib: Generic API to access the core using CMP_EncoderSetting
 //----------------------------------------------------------
-CMP_ERROR CMP_API CMP_CreateBlockEncoder(void** blockEncoder, CMP_EncoderSetting encodeSettings);
-CMP_ERROR CMP_API CMP_CompressBlock(void** blockEncoder, void* srcBlock, unsigned int sourceStride, void* dstBlock, unsigned int dstStride);
-CMP_ERROR CMP_API CMP_CompressBlockXY(void**       blockEncoder,
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CreateBlockEncoder(void** blockEncoder, CMP_EncoderSetting encodeSettings);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CompressBlock(void** blockEncoder, void* srcBlock, unsigned int sourceStride, void* dstBlock, unsigned int dstStride);
+CMP_ERROR CMP_DLLEXPORT CMP_API CMP_CompressBlockXY(void**       blockEncoder,
                                       unsigned int blockx,
                                       unsigned int blocky,
                                       void*        imgSrc,
                                       unsigned int sourceStride,
                                       void*        cmpDst,
                                       unsigned int dstStride);
-void CMP_API      CMP_DestroyBlockEncoder(void** blockEncoder);
+void CMP_DLLEXPORT CMP_API      CMP_DestroyBlockEncoder(void** blockEncoder);
 
 //-----------------------------------
 // CMP_Framework Lib: Host interface
 //-----------------------------------
-void CMP_InitFramework();
+CMP_DLLEXPORT void CMP_InitFramework();
 
 #ifdef __cplusplus
 };
