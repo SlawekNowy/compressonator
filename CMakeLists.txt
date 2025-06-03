@@ -300,7 +300,6 @@ else()
     # filesystem support for c++14 
     if (COMPILER_SUPPORTS_CXX17)
         set(CMAKE_CXX_STANDARD 17)
-        link_libraries(stdc++fs)
     elseif (COMPILER_SUPPORTS_CXX14)
         set(CMAKE_CXX_STANDARD 14)
         #add_definitions(-std=c++14)
