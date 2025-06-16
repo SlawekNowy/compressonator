@@ -266,7 +266,7 @@ add_compile_definitions($<$<CONFIG:Debug>:_DEBUG>)
 # -----------------------------------
 # Set or get all package requirements
 # -----------------------------------
-if (COMPILER_SUPPORTS_CXX17 AND CMP_HOST_WINDOWS)
+if (COMPILER_SUPPORTS_CXX17)
     set(CMAKE_CXX_STANDARD 17)
     add_compile_definitions(_CMP_CPP17_=1)
 else()
@@ -298,7 +298,9 @@ else()
     endif()
 
     # filesystem support for c++14 
-    if (COMPILER_SUPPORTS_CXX14)
+    if (COMPILER_SUPPORTS_CXX17)
+        set(CMAKE_CXX_STANDARD 17)
+    elseif (COMPILER_SUPPORTS_CXX14)
         set(CMAKE_CXX_STANDARD 14)
         #add_definitions(-std=c++14)
         link_libraries(stdc++fs)
